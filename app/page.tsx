@@ -1,4 +1,5 @@
 import { Hero } from "@/components/hero";
+import { FeatureGrid } from "@/components/feature-grid";
 
 export default function Home() {
   return (
@@ -8,7 +9,7 @@ export default function Home() {
         <span className="font-mono text-xs text-zinc-600">v0.4.1 / edge-ready</span>
       </header>
       <div id="top"><Hero /></div>
-      <div id="features" className="h-1" />
+      <FeatureGrid />
     </main>
   );
 }
