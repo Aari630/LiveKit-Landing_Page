@@ -9,10 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google/genai": "^2.24.0",
+    "framer-motion": "11.18.2",
+    "lucide-react": "^1.47.0",
     "next": "14.2.32",
+    "qrcode.react": "^4.2.0",
+    "razorpay": "^2.9.8",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "framer-motion": "11.18.2"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

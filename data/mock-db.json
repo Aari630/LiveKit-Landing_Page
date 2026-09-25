@@ -1,0 +1,12 @@
+{
+  "merchants": [
+    {
+      "id": "ed8cbeb2-145c-4fdc-8c57-0b9dfbc9c9c4",
+      "email": "aarishstore@gmail.com",
+      "password": "Aarish@123",
+      "storeName": "Aarish Store",
+      "razorpayKeyId": "owner@signal.store",
+      "razorpayKeySecret": "password123"
+    }
+  ]
+}

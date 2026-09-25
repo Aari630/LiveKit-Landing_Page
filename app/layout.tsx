@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { MotionProvider } from "@/components/motion-provider";
 import "./globals.css";
 
 const inter = Inter({
@@ -28,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
-        <MotionProvider>{children}</MotionProvider>
+        {children}
       </body>
     </html>
   );
