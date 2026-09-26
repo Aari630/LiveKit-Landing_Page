@@ -23,8 +23,6 @@ export type ChatAgentResponse =
   | { success: true; payload: CheckoutCardPayload }
   | { success: false; error: string };
 
-const systemInstruction =
-  "You are an e-commerce checkout assistant. If the user asks about a product, answer briefly. If they show purchase intent or price hesitation, you MUST call the `generate_checkout_card` tool to offer a 5% discount and generate the UPI payment data.";
 const checkoutTool = {
   functionDeclarations: [
     {
@@ -75,6 +73,8 @@ export async function processChatMessage(
       key_secret: merchant.razorpayKeySecret,
     });
     const model = process.env.GEMINI_MODEL ?? "gemini-3.6-flash";
+    const systemInstruction =
+      `You are an e-commerce checkout assistant representing the store "${merchant.storeName}". If the user asks about a product, answer briefly. If they show purchase intent or price hesitation, you MUST call the \`generate_checkout_card\` tool to offer a 5% discount and generate the UPI payment data.`;
     const contents = [
       ...history.map((message) => ({
         role: message.role,

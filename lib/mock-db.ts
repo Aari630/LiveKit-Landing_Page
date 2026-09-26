@@ -1,6 +1,4 @@
-import { randomUUID } from "node:crypto";
-import fs from "fs";
-import path from "path";
+import { createClient } from "@supabase/supabase-js";
 
 export type Merchant = {
   id: string;
@@ -11,55 +9,64 @@ export type Merchant = {
   razorpayKeySecret: string;
 };
 
-type Database = { merchants: Merchant[] };
-
-const dbPath = path.join(process.cwd(), "data", "mock-db.json");
-
-function readDB(): Database {
-  if (!fs.existsSync(path.dirname(dbPath))) {
-    fs.mkdirSync(path.dirname(dbPath), { recursive: true });
-  }
-
-  if (!fs.existsSync(dbPath)) {
-    fs.writeFileSync(dbPath, JSON.stringify({ merchants: [] }, null, 2));
-  }
-
-  const contents = fs.readFileSync(dbPath, "utf8");
-  return JSON.parse(contents) as Database;
-}
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+);
 
 export async function getMerchantByEmail(email: string) {
-  const data = readDB();
-  return data.merchants.find((merchant) => merchant.email === email) ?? null;
+  const { data } = await supabase
+    .from("merchants")
+    .select("*")
+    .eq("email", email)
+    .maybeSingle();
+
+  return (data as Merchant | null) ?? null;
 }
 
 export async function getMerchantByStoreName(storeName: string) {
-  const data = readDB();
-  return data.merchants.find((merchant) => merchant.storeName === storeName) ?? null;
+  const { data } = await supabase
+    .from("merchants")
+    .select("*")
+    .eq("storeName", storeName)
+    .maybeSingle();
+
+  return (data as Merchant | null) ?? null;
 }
 
 export async function getMerchantById(id: string) {
-  const data = readDB();
-  return data.merchants.find((merchant) => merchant.id === id) ?? null;
+  const { data } = await supabase
+    .from("merchants")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+
+  return (data as Merchant | null) ?? null;
 }
 
 export async function createMerchant(merchantData: Omit<Merchant, "id">) {
-  const data = readDB();
-  const merchant = { id: randomUUID(), ...merchantData };
-  data.merchants.push(merchant);
-  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
-  return merchant;
+  const { data, error } = await supabase
+    .from("merchants")
+    .insert([merchantData])
+    .select("*")
+    .single();
+
+  if (error || !data) {
+    throw new Error(error?.message ?? "Failed to create merchant");
+  }
+
+  return data as Merchant;
 }
 
 export async function updateMerchantKeys(id: string, razorpayKeyId: string, razorpayKeySecret: string) {
-  const data = readDB();
-  const merchant = data.merchants.find((candidate) => candidate.id === id);
-  if (!merchant) return null;
+  const { data } = await supabase
+    .from("merchants")
+    .update({ razorpayKeyId, razorpayKeySecret })
+    .eq("id", id)
+    .select("*")
+    .maybeSingle();
 
-  merchant.razorpayKeyId = razorpayKeyId;
-  merchant.razorpayKeySecret = razorpayKeySecret;
-  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
-  return merchant;
+  return (data as Merchant | null) ?? null;
 }
 
 export const MOCK_DB = {

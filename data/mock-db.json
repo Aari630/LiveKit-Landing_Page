@@ -7,6 +7,14 @@
       "storeName": "Aarish Store",
       "razorpayKeyId": "owner@signal.store",
       "razorpayKeySecret": "password123"
+    },
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "email": "demo@talentglade.com",
+      "password": "talentglade-demo",
+      "storeName": "talentglade",
+      "razorpayKeyId": "rzp_test_placeholder",
+      "razorpayKeySecret": "placeholder_secret"
     }
   ]
 }

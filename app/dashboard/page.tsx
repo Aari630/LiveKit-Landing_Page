@@ -44,6 +44,14 @@ export default async function DashboardPage() {
             </form>
           </div>
         </section>
+
+        <section className="mt-5 rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+          <p className="font-mono text-xs uppercase tracking-[0.16em] text-zinc-500">Embed script</p>
+          <p className="mt-2 text-sm text-zinc-400">Drop this on any page to mount checkout for {merchant.storeName}.</p>
+          <pre className="mt-5 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-4 font-mono text-xs leading-6 text-emerald-300">
+            {`<script src="https://yourapp.vercel.app/widget.js" data-store="${merchant.storeName}"></script>`}
+          </pre>
+        </section>
       </div>
     </main>
   );
