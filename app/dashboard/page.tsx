@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { logout, saveApiKeys } from "@/actions/auth";
 import { getMerchantById } from "@/lib/mock-db";
 import { cookies } from "next/headers";

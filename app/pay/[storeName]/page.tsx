@@ -2,6 +2,8 @@ import { getMerchantByStoreName } from "@/lib/mock-db";
 import { notFound } from "next/navigation";
 import { StorefrontChat } from "@/components/storefront-chat";
 
+export const dynamic = "force-dynamic";
+
 type Props = { params: { storeName: string } };
 
 export default async function StorefrontPage({ params }: Props) {
