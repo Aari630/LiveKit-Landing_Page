@@ -25,18 +25,18 @@ export function Hero() {
 
             <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <a
-                href="#features"
+                href="/signup"
                 className="inline-flex min-h-12 items-center justify-center rounded-xl bg-emerald-400 px-6 text-sm font-semibold text-zinc-950 shadow-[0_0_32px_rgba(52,211,153,0.18)] transition-colors hover:bg-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
               >
-                Deploy to Shopify
+                Get Started
                 <span aria-hidden="true" className="ml-3 text-lg">-&gt;</span>
               </a>
 
               <a
-                href="/signup"
+                href="#features"
                 className="inline-flex min-h-12 items-center justify-center rounded-xl border border-zinc-700 px-6 text-sm font-medium text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-emerald-300"
               >
-                Create your store
+                View Demo
               </a>
             </div>
           </div>

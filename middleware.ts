@@ -4,14 +4,6 @@ export function middleware(request: NextRequest) {
   const session = request.cookies.get("merchant-session")?.value;
   const { pathname } = request.nextUrl;
 
-  if (pathname === "/") {
-    if (!session) {
-      return NextResponse.redirect(new URL("/signup", request.url));
-    }
-
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
   if (pathname.startsWith("/dashboard") && !session) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
